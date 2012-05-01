@@ -81,12 +81,12 @@ module Sorcery
               attr_accessor @sorcery_config.password_attribute_name
               attr_protected @sorcery_config.crypted_password_attribute_name, @sorcery_config.salt_attribute_name
               if defined?(DataMapper)
-                before :save, :encrypt_password, :if => Proc.new { |record|
-                  record.send(sorcery_config.password_attribute_name).present?
-                }
-                after :save, :clear_virtual_password, :if => Proc.new { |record|
-                  record.send(sorcery_config.password_attribute_name).present?
-                }
+                before :save do |record|
+                  encrypt_password if record.send(sorcery_config.password_attribute_name).present?
+                end
+                after :save do |record|
+                  clear_virtual_password if record.send(sorcery_config.password_attribute_name).present?
+                end
               else
                 before_save :encrypt_password, :if => Proc.new { |record|
                   record.send(sorcery_config.password_attribute_name).present?
