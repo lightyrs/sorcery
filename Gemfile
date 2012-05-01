@@ -23,4 +23,5 @@ group :development do
 	gem 'capybara'
 	gem 'mongo_mapper'
 	gem 'mongoid', "~> 2.4.4"
+  gem 'data_mapper', "~> 1.2.0"
 end

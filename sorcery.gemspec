@@ -64,6 +64,7 @@ Gem::Specification.new do |s|
     "lib/sorcery/model/adapters/active_record.rb",
     "lib/sorcery/model/adapters/mongo_mapper.rb",
     "lib/sorcery/model/adapters/mongoid.rb",
+    "lib/sorcery/model/adapters/data_mapper.rb",
     "lib/sorcery/model/submodules/activity_logging.rb",
     "lib/sorcery/model/submodules/brute_force_protection.rb",
     "lib/sorcery/model/submodules/external.rb",
