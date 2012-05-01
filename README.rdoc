@@ -1,6 +1,10 @@
 {<img src="https://secure.travis-ci.org/NoamB/sorcery.png" />}[http://travis-ci.org/NoamB/sorcery]
 
 = sorcery
+This branch of sorcery is my attempt at DataMapper compatibility. 
+The adapter is working for my needs, however, I would not reccomend using it without careful oversight.
+Ideally, we can get a decent adapter together soon.
+
 Magical Authentication for Rails 3.
 Supports ActiveRecord, Mongoid and MongoMapper.
 
