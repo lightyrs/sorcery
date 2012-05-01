@@ -26,7 +26,7 @@ module Sorcery
 
           def find_by_credentials(credentials)
             @sorcery_config.username_attribute_names.each do |attribute|
-              @user = where(attribute => credential_regex(credentials[0])).first
+              @user = first(attribute.to_sym => credential_regex(credentials[0]))
               break if @user
             end
             @user
@@ -70,9 +70,9 @@ module Sorcery
 
           def get_current_users
             config = sorcery_config
-            where(config.last_activity_at_attribute_name.ne.to_sym => nil) \
-            .where("this.#{config.last_logout_at_attribute_name} == null || this.#{config.last_activity_at_attribute_name} > this.#{config.last_logout_at_attribute_name}") \
-            .where(config.last_activity_at_attribute_name.gt => config.activity_timeout.seconds.ago.utc).order_by([:_id,:asc])
+            first(config.last_activity_at_attribute_name.ne.to_sym => nil) \
+            .first("this.#{config.last_logout_at_attribute_name} == null || this.#{config.last_activity_at_attribute_name} > this.#{config.last_logout_at_attribute_name}") \
+            .first(config.last_activity_at_attribute_name.gt => config.activity_timeout.seconds.ago.utc).order_by([:_id,:asc])
           end
         end
       end

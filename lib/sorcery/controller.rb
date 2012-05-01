@@ -126,7 +126,7 @@ module Sorcery
       end
 
       def after_logout!
-        Config.after_logout.each {|c| self.send(c)}
+        Config.after_logout.each {|c| Rails.logger.debug(c.inspect.cyan); self.send(c)}
       end
 
       def user_class

@@ -51,7 +51,7 @@ module Sorcery
             config = sorcery_config
             self.send(:"#{config.remember_me_token_attribute_name}=", TemporaryToken.generate_random_token)
             self.send(:"#{config.remember_me_token_expires_at_attribute_name}=", Time.now.in_time_zone + config.remember_me_for)
-            self.save!(:validate => false)
+            defined?(DataMapper) ? self.save! : self.save!(:validate => false)
           end
           
           # You shouldn't really use this one yourself - it's called by the controller's 'forget_me!' method.
@@ -59,7 +59,7 @@ module Sorcery
             config = sorcery_config
             self.send(:"#{config.remember_me_token_attribute_name}=", nil)
             self.send(:"#{config.remember_me_token_expires_at_attribute_name}=", nil)
-            self.save!(:validate => false)
+            defined?(DataMapper) ? self.save! : self.save!(:validate => false)
           end
         end
       end
